@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addContact } from '../../redux/actions/phonebookActions';
+import { getContactsSelector } from '../../redux/selectors';
+import { addContact } from '../../redux/operations/contactOperations';
 import { CSSTransition } from 'react-transition-group';
-import { v4 as uuidv4 } from 'uuid';
+// import { v4 as uuidv4 } from 'uuid';
 import Alert from '../Alert/Alert';
 import styles from './ContactForm.module.css';
 import '../App.css';
@@ -20,11 +21,7 @@ class ContactForm extends Component {
 
   handleSubmitForm = event => {
     event.preventDefault();
-    if (
-      this.props.state.contacts.items.find(
-        contact => contact.name === this.state.name,
-      )
-    ) {
+    if (this.props.contacts.find(contact => contact.name === this.state.name)) {
       this.setState({ error: true, name: '', number: '' });
       setTimeout(() => {
         this.setState({ error: false });
@@ -33,7 +30,7 @@ class ContactForm extends Component {
       const contact = {
         name: this.state.name,
         number: this.state.number,
-        id: uuidv4(),
+        // id: uuidv4(),
       };
       this.props.addContact(contact);
       this.setState({ name: '', number: '' });
@@ -82,8 +79,9 @@ class ContactForm extends Component {
     );
   }
 }
+
 const mapStateToProps = state => {
-  return { state };
+  return { contacts: getContactsSelector(state) };
 };
 
 const mapDispatchToProps = {

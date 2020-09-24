@@ -1,30 +1,15 @@
-import {
-  configureStore,
-  combineReducers,
-  getDefaultMiddleware,
-} from '@reduxjs/toolkit';
-import { persistStore, persistReducer, PERSIST } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import ReduxThunk from 'redux-thunk';
+import { composeWithDevTools } from 'redux-devtools-extension';
+import { persistStore } from 'redux-persist';
 import phonebookReducer from './reducers/phonebookReducer';
-
-const persistConfig = {
-  key: 'root',
-  storage,
-};
 
 const rootReducer = combineReducers({
   contacts: phonebookReducer,
 });
+const middleWares = [ReduxThunk];
+const enhancer = applyMiddleware(...middleWares);
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
-
-export const store = configureStore({
-  reducer: persistedReducer,
-  middleware: getDefaultMiddleware({
-    serializableCheck: {
-      ignoredActions: [PERSIST],
-    },
-  }),
-});
+export const store = createStore(rootReducer, composeWithDevTools(enhancer));
 
 export const persistor = persistStore(store);

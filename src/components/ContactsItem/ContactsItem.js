@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { removeContact } from '../../redux/actions/phonebookActions';
+import { removeContact } from '../../redux/operations/contactOperations';
 import styles from './ContactsItem.module.css';
 
 function ContactsItem({ contact: { name, number, id } }) {
