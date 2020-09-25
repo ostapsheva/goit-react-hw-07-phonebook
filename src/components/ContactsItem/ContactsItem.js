@@ -5,7 +5,6 @@ import styles from './ContactsItem.module.css';
 
 function ContactsItem({ contact: { name, number, id } }) {
   const dispatch = useDispatch();
-
   const handleClick = () => dispatch(removeContact(id));
 
   return (
