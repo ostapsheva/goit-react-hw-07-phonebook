@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { getContactsSelector } from '../../redux/selectors';
 import { addContact } from '../../redux/operations/contactOperations';
 import { CSSTransition } from 'react-transition-group';
-// import { v4 as uuidv4 } from 'uuid';
 import Alert from '../Alert/Alert';
 import styles from './ContactForm.module.css';
 import '../App.css';
@@ -30,7 +29,6 @@ class ContactForm extends Component {
       const contact = {
         name: this.state.name,
         number: this.state.number,
-        // id: uuidv4(),
       };
       this.props.addContact(contact);
       this.setState({ name: '', number: '' });
@@ -57,7 +55,7 @@ class ContactForm extends Component {
             <input
               className={styles.input}
               name="number"
-              type="text"
+              type="tel"
               value={this.state.number}
               onChange={this.handleChange}
               required

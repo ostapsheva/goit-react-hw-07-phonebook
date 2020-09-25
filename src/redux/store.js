@@ -1,7 +1,7 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { persistStore } from 'redux-persist';
+// import { persistStore } from 'redux-persist';
 import phonebookReducer from './reducers/phonebookReducer';
 
 const rootReducer = combineReducers({
@@ -12,4 +12,4 @@ const enhancer = applyMiddleware(...middleWares);
 
 export const store = createStore(rootReducer, composeWithDevTools(enhancer));
 
-export const persistor = persistStore(store);
+// export const persistor = persistStore(store);

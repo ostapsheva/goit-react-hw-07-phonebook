@@ -16,7 +16,7 @@ function Filter() {
       Find contacts by name
       <input
         className={styles.input}
-        type="text"
+        type="search"
         value={filter}
         onChange={onChangeFilter}
       />

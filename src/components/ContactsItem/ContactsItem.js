@@ -6,7 +6,7 @@ import styles from './ContactsItem.module.css';
 function ContactsItem({ contact: { name, number, id } }) {
   const dispatch = useDispatch();
 
-  const handleClick = e => dispatch(removeContact(e.currentTarget.dataset.id));
+  const handleClick = () => dispatch(removeContact(id));
 
   return (
     <li className={styles.contactsList}>
